@@ -18,9 +18,14 @@ namespace PrimeraAPI.Data
         public DbSet<Album> Albums { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Member> Members { get; set; }
-    }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:MusicDbConnection");
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Name=ConnectionStrings:MusicDbConnection");
+            }
+        }
     }
 
 }
